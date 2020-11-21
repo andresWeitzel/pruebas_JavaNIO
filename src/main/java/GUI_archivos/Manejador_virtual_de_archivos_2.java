@@ -47,7 +47,7 @@ public class Manejador_virtual_de_archivos_2 extends javax.swing.JFrame {
         lblModific = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtDescripcion = new javax.swing.JTextArea();
@@ -73,7 +73,6 @@ public class Manejador_virtual_de_archivos_2 extends javax.swing.JFrame {
             }
         });
 
-        lstList.setEnabled(false);
         lstList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lstListMouseClicked(evt);
@@ -102,6 +101,8 @@ public class Manejador_virtual_de_archivos_2 extends javax.swing.JFrame {
         jScrollPane1.setViewportView(txtDescripcion);
 
         jLabel8.setText("Carpeta base:");
+
+        txtCarpetaBase.setEditable(false);
 
         btnGrabar.setText("GRABAR");
 
@@ -151,7 +152,7 @@ public class Manejador_virtual_de_archivos_2 extends javax.swing.JFrame {
                                     .addComponent(jLabel8))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField1)
+                                    .addComponent(txtNombre)
                                     .addComponent(jScrollPane1)
                                     .addComponent(txtCarpetaBase)))))))
         );
@@ -171,7 +172,7 @@ public class Manejador_virtual_de_archivos_2 extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel6)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
@@ -206,6 +207,9 @@ public class Manejador_virtual_de_archivos_2 extends javax.swing.JFrame {
         lblModific.setText("");
         lblNombre.setText("");
         lblTamanio.setText("");
+        txtCarpetaBase.setText("");
+        txtDescripcion.setText("");
+        txtNombre.setText("");
     }
 
     private void btnBuscarCarpetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCarpetaActionPerformed
@@ -218,6 +222,7 @@ public class Manejador_virtual_de_archivos_2 extends javax.swing.JFrame {
         if (returnVol == JFileChooser.APPROVE_OPTION) {
             carpeta = jfc.getSelectedFile().getAbsolutePath();
             txtCarpeta.setText(carpeta);
+            txtCarpetaBase.setText(carpeta);
             File ruta = new File(txtCarpeta.getText());
             String[] listado = ruta.list();
             for (int i = 0; i < listado.length; i++) {
@@ -287,7 +292,6 @@ public class Manejador_virtual_de_archivos_2 extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblModific;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblTamanio;
@@ -295,5 +299,6 @@ public class Manejador_virtual_de_archivos_2 extends javax.swing.JFrame {
     private javax.swing.JTextField txtCarpeta;
     private javax.swing.JTextField txtCarpetaBase;
     private javax.swing.JTextArea txtDescripcion;
+    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }

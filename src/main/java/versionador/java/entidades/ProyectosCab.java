@@ -10,6 +10,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -38,6 +40,7 @@ public class ProyectosCab implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_proyecto")
     private Integer idProyecto;
@@ -58,7 +61,7 @@ public class ProyectosCab implements Serializable {
     private String creadoUsuario;
     @Basic(optional = false)
     @Column(name = "creado_dia")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date creadoDia;
 
     public ProyectosCab() {
@@ -77,6 +80,14 @@ public class ProyectosCab implements Serializable {
         this.creadoUsuario = creadoUsuario;
         this.creadoDia = creadoDia;
     }
+
+    public ProyectosCab(String nombre, String descripcion, String carpetaBase, String activo, String creadoUsuario) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.carpetaBase = carpetaBase;
+        this.activo = activo;
+        this.creadoUsuario = creadoUsuario;
+    }    
 
     public Integer getIdProyecto() {
         return idProyecto;
