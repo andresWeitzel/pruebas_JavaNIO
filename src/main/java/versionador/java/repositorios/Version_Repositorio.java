@@ -4,53 +4,53 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import versionador.java.entidades.ProyectosCab;
-import versionador.java.interfaces.I_ProyectosCab;
+import versionador.java.entidades.Version;
+import versionador.java.interfaces.I_Version;
 
-public class ProyectosCab_Repositorio implements I_ProyectosCab{
-
+public class Version_Repositorio implements I_Version{
+    
     private EntityManagerFactory emf;
 
-    public ProyectosCab_Repositorio(EntityManagerFactory emf) {
+    public Version_Repositorio(EntityManagerFactory emf) {
         this.emf = emf;
     }
     
-            
+    
     @Override
-    public void save(ProyectosCab proyectosCab) {
-        if(proyectosCab==null) return;
+    public void save(Version version) {
+        if(version == null) return;
         EntityManager em=emf.createEntityManager();
         em.getTransaction().begin();
-        em.persist(proyectosCab);
+        em.persist(version);
         em.getTransaction().commit();
         em.close();
     }
 
     @Override
-    public void remove(ProyectosCab proyectosCab) {
-        if(proyectosCab == null) return;
+    public void remove(Version version) {
+        if(version == null) return;
         EntityManager em=emf.createEntityManager();
         em.getTransaction().begin();
-        em.remove(em.merge(proyectosCab));
+        em.remove(em.merge(version));
         em.getTransaction().commit();
         em.close();
     }
 
     @Override
-    public void update(ProyectosCab proyectosCab) {
-        if(proyectosCab == null) return;
+    public void update(Version version) {
+        if(version == null) return;
         EntityManager em=emf.createEntityManager();
         em.getTransaction().begin();
-        em.merge(proyectosCab);
+        em.merge(version);
         em.getTransaction().commit();
         em.close();
     }
 
     @Override
-    public List<ProyectosCab> getAll() {
-        List<ProyectosCab> list = new ArrayList();
+    public List<Version> getAll() {
+        List<Version> list = new ArrayList();
         EntityManager em=emf.createEntityManager();
-        list=(List<ProyectosCab>)em.createNamedQuery("ProyectosCab.findAll").getResultList();
+        list=(List<Version>)em.createNamedQuery("Version.findAll").getResultList();
         return list;
     }
     

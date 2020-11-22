@@ -1,56 +1,54 @@
 package versionador.java.repositorios;
-
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import versionador.java.entidades.ProyectosCab;
-import versionador.java.interfaces.I_ProyectosCab;
+import versionador.java.entidades.Transaccion;
+import versionador.java.interfaces.I_Transaccion;
 
-public class ProyectosCab_Repositorio implements I_ProyectosCab{
-
+public class Transaccion_Repositorio implements I_Transaccion{
+    
     private EntityManagerFactory emf;
-
-    public ProyectosCab_Repositorio(EntityManagerFactory emf) {
+    
+    public Transaccion_Repositorio(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    
-            
+
     @Override
-    public void save(ProyectosCab proyectosCab) {
-        if(proyectosCab==null) return;
+    public void save(Transaccion transaccion) {
+        if(transaccion == null) return;
         EntityManager em=emf.createEntityManager();
         em.getTransaction().begin();
-        em.persist(proyectosCab);
+        em.persist(transaccion);
         em.getTransaction().commit();
         em.close();
     }
 
     @Override
-    public void remove(ProyectosCab proyectosCab) {
-        if(proyectosCab == null) return;
+    public void remove(Transaccion transaccion) {
+        if(transaccion == null) return;
         EntityManager em=emf.createEntityManager();
         em.getTransaction().begin();
-        em.remove(em.merge(proyectosCab));
+        em.remove(em.merge(transaccion));
         em.getTransaction().commit();
         em.close();
     }
 
     @Override
-    public void update(ProyectosCab proyectosCab) {
-        if(proyectosCab == null) return;
+    public void update(Transaccion transaccion) {
+        if(transaccion == null) return;
         EntityManager em=emf.createEntityManager();
         em.getTransaction().begin();
-        em.merge(proyectosCab);
+        em.merge(transaccion);
         em.getTransaction().commit();
         em.close();
     }
 
     @Override
-    public List<ProyectosCab> getAll() {
-        List<ProyectosCab> list = new ArrayList();
+    public List<Transaccion> getAll() {
+        List<Transaccion> list = new ArrayList();
         EntityManager em=emf.createEntityManager();
-        list=(List<ProyectosCab>)em.createNamedQuery("ProyectosCab.findAll").getResultList();
+        list=(List<Transaccion>)em.createNamedQuery("Transaccion.findAll").getResultList();
         return list;
     }
     
