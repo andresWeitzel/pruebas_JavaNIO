@@ -67,6 +67,13 @@ public class ProyectosDet implements Serializable {
         this.destino = destino;
     }
 
+    public ProyectosDet(int idProyecto, String archivo, String destino, Usuario idUsuario) {
+        this.idProyecto = idProyecto;
+        this.archivo = archivo;
+        this.destino = destino;
+        this.idUsuario = idUsuario;
+    }    
+
     public Integer getIdArchivo() {
         return idArchivo;
     }
