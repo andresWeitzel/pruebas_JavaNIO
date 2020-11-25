@@ -1,6 +1,12 @@
 package GUI_archivos;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -55,6 +61,9 @@ public class Manejador_virtual_de_archivos extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         txtCarpetaBase = new javax.swing.JTextField();
         btnGrabar = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        txtCarpetaDestino = new javax.swing.JTextField();
+        btnBuscarDestino = new javax.swing.JButton();
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -112,43 +121,45 @@ public class Manejador_virtual_de_archivos extends javax.swing.JFrame {
             }
         });
 
+        jLabel9.setText("Carpeta destino:");
+
+        btnBuscarDestino.setText("Buscar");
+        btnBuscarDestino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarDestinoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(40, 40, 40)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtCarpeta, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(212, 212, 212)
+                            .addComponent(btnBuscarCarpeta))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCarpeta, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(354, 354, 354))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(212, 212, 212)
-                .addComponent(btnBuscarCarpeta))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
+                        .addGap(8, 8, 8)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
-                                .addGap(52, 52, 52))
-                            .addComponent(jLabel5))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblModific, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblTamanio, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(44, 44, 44)
-                                .addComponent(btnGrabar))))
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblModific, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
@@ -156,11 +167,28 @@ public class Manejador_virtual_de_archivos extends javax.swing.JFrame {
                                     .addComponent(jLabel7)
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel8))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(16, 16, 16)
+                                        .addComponent(txtCarpetaBase))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(14, 14, 14)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jScrollPane1)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNombre)
-                                    .addComponent(jScrollPane1)
-                                    .addComponent(txtCarpetaBase)))))))
+                                    .addComponent(lblTamanio, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCarpetaDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnBuscarDestino))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(170, 170, 170)
+                        .addComponent(btnGrabar)))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,9 +215,14 @@ public class Manejador_virtual_de_archivos extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
                             .addComponent(txtCarpetaBase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(txtCarpetaDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnBuscarDestino))
                         .addGap(18, 18, 18)
                         .addComponent(btnGrabar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -202,7 +235,7 @@ public class Manejador_virtual_de_archivos extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addComponent(lblModific, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addGap(34, 34, 34))
         );
 
         pack();
@@ -216,23 +249,36 @@ public class Manejador_virtual_de_archivos extends javax.swing.JFrame {
         txtCarpetaBase.setText("");
         txtDescripcion.setText("");
         txtNombre.setText("");
+        txtCarpetaDestino.setText("");
         modelo.clear();
     }
 
     private void btnBuscarCarpetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCarpetaActionPerformed
         limpiar();
         String carpeta = "";
+        String carpetaBase = "";
         JFileChooser jfc = new JFileChooser();
         jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         int returnVol = jfc.showOpenDialog(this);
         if (returnVol == JFileChooser.APPROVE_OPTION) {
             carpeta = jfc.getSelectedFile().getAbsolutePath();
+            carpetaBase = jfc.getSelectedFile().getName();
             txtCarpeta.setText(carpeta);
-            txtCarpetaBase.setText(carpeta);
-            File ruta = new File(txtCarpeta.getText());
-            String[] listado = ruta.list();
+            txtCarpetaBase.setText(carpetaBase);
+            File ruta = new File(txtCarpeta.getText());                        
+            File[] listado = ruta.listFiles();
             for (int i = 0; i < listado.length; i++) {
-                modelo.addElement(listado[i]);
+                if(listado[i].isDirectory()) {
+                    modelo.addElement(listado[i].getName()+" (Carpeta)");
+                    File subCarpeta = new File(txtCarpeta.getText()+File.separator+listado[i].getName());
+                    File[] subListado = subCarpeta.listFiles();
+                        for (int j = 0; j < subListado.length; j++){                        
+                            modelo.addElement(listado[i].getName()+File.separator+subListado[j].getName());
+                        }                    
+                }
+                else {
+                    modelo.addElement(listado[i].getName());
+                }
             }
             lstList.setModel(modelo);
         } else {
@@ -242,7 +288,8 @@ public class Manejador_virtual_de_archivos extends javax.swing.JFrame {
 
     private void lstListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstListMouseClicked
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        File f = new File(txtCarpeta.getText() + "\\" + lstList.getSelectedValue());
+        File f = new File(txtCarpeta.getText() + File.separator + lstList.getSelectedValue());
+        if(f.isDirectory())lblNombre.setText(f.getName()+" (Carpeta)");
         lblNombre.setText(f.getName());
         lblTamanio.setText(f.length() + " bytes");
         lblModific.setText(sdf.format(f.lastModified()));
@@ -259,24 +306,91 @@ public class Manejador_virtual_de_archivos extends javax.swing.JFrame {
         pCab.save(proyecto);
         if (proyecto.getIdProyecto() > 0) {
             JOptionPane.showMessageDialog(this, "Proyecto Guardado en el Repositorio de Fran !!");
+            copiarDirectorio(txtCarpeta.getText(), txtCarpetaDestino.getText());
         }
 
         for(int i=0;i<modelo.getSize();i++){
-            File f = new File(txtCarpeta.getText() + "\\" + modelo.getElementAt(i));
+            File f = new File(txtCarpeta.getText() + File.separator + modelo.getElementAt(i));
             ProyectosDet proyectosDet = new ProyectosDet(proyecto.getIdProyecto(), f.getName(), "destino del archivo",usuario);
             pDet.save(proyectosDet);
         }
     }//GEN-LAST:event_btnGrabarActionPerformed
 
+    private void btnBuscarDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarDestinoActionPerformed
+        String carpeta = "";
+        JFileChooser jfc = new JFileChooser();
+        jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int returnVol = jfc.showOpenDialog(this);
+        if (returnVol == JFileChooser.APPROVE_OPTION) {
+            carpeta = jfc.getSelectedFile().getAbsolutePath();
+            txtCarpetaDestino.setText(carpeta);
+        } else {
+            txtCarpeta.setText("");
+        }
+    }//GEN-LAST:event_btnBuscarDestinoActionPerformed
+
+    /*
+        Validar debería ser una clase que tenga más validaciones para evitar cargas erróneas como las rutas
+    */
     private boolean validar(){
         if(txtNombre.getText().equals("")) return false;
         if(txtDescripcion.getText().equals("")) return false;
         if(txtCarpetaBase.getText().equals("")) return false;
+        if(txtCarpetaDestino.getText().equals("")) return false;
         return true;
     }
-    /**
-     * @param args the command line arguments
-     */
+    
+    private void copiarDirectorio(String origen, String destino) {
+        comprobarCrearDirectorio(destino);
+        File directorio = new File(origen);
+        File f;
+        if (directorio.isDirectory()) {
+            comprobarCrearDirectorio(destino);
+            String[] files = directorio.list();
+            if (files.length > 0) {
+                for (String archivo : files) {
+                    f = new File(origen + File.separator + archivo);
+                    if (f.isDirectory()) {
+                        comprobarCrearDirectorio(destino + File.separator + archivo + File.separator);
+                        copiarDirectorio(origen + File.separator + archivo + File.separator, destino + File.separator + archivo + File.separator);
+                    } else { //Es un archivo
+                        copiarArchivo(origen + File.separator + archivo, destino + File.separator + archivo);
+                    }
+                }
+            }
+        }
+    }
+
+    private void copiarArchivo(String sOrigen, String sDestino) {
+        try {
+            File origen = new File(sOrigen);
+            File destino = new File(sDestino);
+            InputStream in = new FileInputStream(origen);
+            OutputStream out = new FileOutputStream(destino);
+
+            byte[] buf = new byte[1024];
+            int len;
+
+            while ((len = in.read(buf)) > 0) {
+                out.write(buf, 0, len);
+            }
+
+            in.close();
+            out.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void comprobarCrearDirectorio(String ruta) {
+        File directorio = new File(ruta);
+        if (!directorio.exists()) {
+            directorio.mkdirs();
+        }
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -312,6 +426,7 @@ public class Manejador_virtual_de_archivos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarCarpeta;
+    private javax.swing.JButton btnBuscarDestino;
     private javax.swing.JButton btnGrabar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -321,6 +436,7 @@ public class Manejador_virtual_de_archivos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
@@ -331,6 +447,7 @@ public class Manejador_virtual_de_archivos extends javax.swing.JFrame {
     private javax.swing.JList<String> lstList;
     private javax.swing.JTextField txtCarpeta;
     private javax.swing.JTextField txtCarpetaBase;
+    private javax.swing.JTextField txtCarpetaDestino;
     private javax.swing.JTextArea txtDescripcion;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables

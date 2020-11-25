@@ -27,5 +27,6 @@ versionador\java\interfaces\I_ProyectosDet.class
 versionador\java\interfaces\I_Version.class
 versionador\java\entidades\ProyectosCab.class
 GUI_archivos\Manejador_virtual_de_archivos$3.class
+GUI_archivos\Manejador_virtual_de_archivos$6.class
 versionador\java\repositorios\ProyectosCab_Repositorio.class
 versionador\java\entidades\Transaccion.class
