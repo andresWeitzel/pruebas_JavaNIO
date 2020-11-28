@@ -9,7 +9,7 @@ import versionador.java.entidades.ProyectosDet;
 import versionador.java.entidades.Transaccion;
 import versionador.java.entidades.Version;
 
-@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2020-11-25T06:09:27", comments="EclipseLink-2.7.7.v20200504-rNA")
+@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2020-11-28T15:11:40", comments="EclipseLink-2.7.7.v20200504-rNA")
 @StaticMetamodel(Usuario.class)
 public class Usuario_ { 
 

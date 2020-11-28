@@ -30,6 +30,7 @@ public class Manejador_virtual_de_archivos extends javax.swing.JFrame {
     I_ProyectosDet pDet = new ProyectosDet_Repositorio(emf);
     I_Usuario ur = new Usuario_Repositorio(emf);
     DefaultListModel modelo = new DefaultListModel();
+    File subCarpeta;
 
     public Manejador_virtual_de_archivos() {
         initComponents();
@@ -257,6 +258,7 @@ public class Manejador_virtual_de_archivos extends javax.swing.JFrame {
         limpiar();
         String carpeta = "";
         String carpetaBase = "";
+
         JFileChooser jfc = new JFileChooser();
         jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         int returnVol = jfc.showOpenDialog(this);
@@ -265,42 +267,47 @@ public class Manejador_virtual_de_archivos extends javax.swing.JFrame {
             carpetaBase = jfc.getSelectedFile().getName();
             txtCarpeta.setText(carpeta);
             txtCarpetaBase.setText(carpetaBase);
-            File ruta = new File(txtCarpeta.getText());                        
+            subCarpeta = new File(txtCarpeta.getText());
+            File ruta = new File(txtCarpeta.getText());
             File[] listado = ruta.listFiles();
-            for (int i = 0; i < listado.length; i++) {
-                if(listado[i].isDirectory()) {
-                    modelo.addElement(listado[i].getName()+" (Carpeta)");
-                    File subCarpeta = new File(txtCarpeta.getText()+File.separator+listado[i].getName());
-                    File[] subListado = subCarpeta.listFiles();
-                        for (int j = 0; j < subListado.length; j++){                        
-                            modelo.addElement(listado[i].getName()+File.separator+subListado[j].getName());
-                        }                    
-                }
-                else {
-                    modelo.addElement(listado[i].getName());
-                }
-            }
-            lstList.setModel(modelo);
-        } else {
-            txtCarpeta.setText("");
+            buscarCarpeta(listado);
         }
     }//GEN-LAST:event_btnBuscarCarpetaActionPerformed
+
+    private void buscarCarpeta(File[] listado) {
+        for (int i = 0; i < listado.length; i++) {
+            if (listado[i].isDirectory()) {
+                modelo.addElement(listado[i].getName() + " (Carpeta)");
+                subCarpeta = new File(subCarpeta + File.separator + listado[i].getName());
+                File[] subListado = subCarpeta.listFiles();
+                if (subListado.length > 0) {
+                    buscarCarpeta(subListado);
+                    subCarpeta = new File(txtCarpeta.getText());
+                }
+            } else {
+                modelo.addElement(listado[i].getName());
+            }
+        }
+        lstList.setModel(modelo);
+    }
 
     private void lstListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstListMouseClicked
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         File f = new File(txtCarpeta.getText() + File.separator + lstList.getSelectedValue());
-        if(f.isDirectory())lblNombre.setText(f.getName()+" (Carpeta)");
+        if (f.isDirectory()) {
+            lblNombre.setText(f.getName() + " (Carpeta)");
+        }
         lblNombre.setText(f.getName());
         lblTamanio.setText(f.length() + " bytes");
         lblModific.setText(sdf.format(f.lastModified()));
     }//GEN-LAST:event_lstListMouseClicked
 
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
-        if(!validar()){
+        if (!validar()) {
             JOptionPane.showMessageDialog(this, "NO SE PUDO GUARDAR");
             return;
         }
-        Usuario usuario = new Usuario(1,"Pepito");
+        Usuario usuario = new Usuario(1, "Pepito");
         ur.save(usuario);
         ProyectosCab proyecto = new ProyectosCab(txtNombre.getText(), txtDescripcion.getText(), txtCarpetaBase.getText(), "SI", "número de usuario");
         pCab.save(proyecto);
@@ -309,9 +316,9 @@ public class Manejador_virtual_de_archivos extends javax.swing.JFrame {
             copiarDirectorio(txtCarpeta.getText(), txtCarpetaDestino.getText());
         }
 
-        for(int i=0;i<modelo.getSize();i++){
+        for (int i = 0; i < modelo.getSize(); i++) {
             File f = new File(txtCarpeta.getText() + File.separator + modelo.getElementAt(i));
-            ProyectosDet proyectosDet = new ProyectosDet(proyecto.getIdProyecto(), f.getName(), "destino del archivo",usuario);
+            ProyectosDet proyectosDet = new ProyectosDet(proyecto.getIdProyecto(), f.getName(), "destino del archivo", usuario);
             pDet.save(proyectosDet);
         }
     }//GEN-LAST:event_btnGrabarActionPerformed
@@ -331,15 +338,23 @@ public class Manejador_virtual_de_archivos extends javax.swing.JFrame {
 
     /*
         Validar debería ser una clase que tenga más validaciones para evitar cargas erróneas como las rutas
-    */
-    private boolean validar(){
-        if(txtNombre.getText().equals("")) return false;
-        if(txtDescripcion.getText().equals("")) return false;
-        if(txtCarpetaBase.getText().equals("")) return false;
-        if(txtCarpetaDestino.getText().equals("")) return false;
+     */
+    private boolean validar() {
+        if (txtNombre.getText().equals("")) {
+            return false;
+        }
+        if (txtDescripcion.getText().equals("")) {
+            return false;
+        }
+        if (txtCarpetaBase.getText().equals("")) {
+            return false;
+        }
+        if (txtCarpetaDestino.getText().equals("")) {
+            return false;
+        }
         return true;
     }
-    
+
     private void copiarDirectorio(String origen, String destino) {
         comprobarCrearDirectorio(destino);
         File directorio = new File(origen);
@@ -391,6 +406,7 @@ public class Manejador_virtual_de_archivos extends javax.swing.JFrame {
             directorio.mkdirs();
         }
     }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
