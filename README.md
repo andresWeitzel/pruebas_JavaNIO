@@ -22,8 +22,8 @@
 ##### 3)Inicializamos nuestro repositorio local .git
 * git init
 
-##### ``` Tu Repositorio Remoto tiene un commit que tu local no tiene, y viceversa. No hay un ancestro común y por lo tanto no se puede hacer merge.
-Si el código del remoto es ligeramente parecido a tu código local y efectivamente quieres hacer un merge, la solución sería:... ```
+##### `Tu Repositorio Remoto tiene un commit que tu local no tiene, y viceversa. No hay un ancestro común y por lo tanto no se puede hacer merge.
+Si el código del remoto es ligeramente parecido a tu código local y efectivamente quieres hacer un merge, la solución sería:... `
 
 ##### 4)Descargamos todas las referencias y objetos de nuestro fork
 * git fetch --all
@@ -44,7 +44,7 @@ Si el código del remoto es ligeramente parecido a tu código local y efectivame
 * git push origin master
 
 
-#####  ``` Si se quiere realizar una restructuracion del proyecto desde tu FORK y pisar todo lo que hay... ```
+#####  `Si se quiere realizar una restructuracion del proyecto desde tu FORK y pisar todo lo que hay...`
 * git push -f --set-upstream origin master
 * (OJO, CON ESTO SE PIERDE TODO LO QUE HABIA)
 
