@@ -5,9 +5,9 @@
 
 </br>
 
-## Más Información
-
 <hr>
+
+## Más Información
 
 </br>
 
