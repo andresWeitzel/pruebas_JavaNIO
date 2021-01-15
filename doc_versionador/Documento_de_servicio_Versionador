@@ -1,0 +1,17 @@
+Documento de servicio
+
+1. Crear directorio
+Input: nombre provisto por el usuario
+Output: nueva carpeta con el nombre provisto por el usuario
+
+2. Copiar/mover archivos
+Input: destino
+Output: nueva ruta
+
+3. Detectar cambios
+Input: un archivo
+Output: fecha, tamaño y usuario que ejecutó las últimas modificaciones
+
+4. Fusionar versiones
+Input: dos archivos representando dos versiones distintas de un documento
+Output: un archivo que integra (selectivamente) ambas versiones
