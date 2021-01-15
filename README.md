@@ -7,6 +7,8 @@
 
 <hr>
 
+</br>
+
 ## Más Información
 
 </br>
