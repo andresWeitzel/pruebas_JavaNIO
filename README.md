@@ -22,8 +22,7 @@
 ##### 3)Inicializamos nuestro repositorio local .git
 * git init
 
-##### `Tu Repositorio Remoto tiene un commit que tu local no tiene, y viceversa. No hay un ancestro común y por lo tanto no se puede hacer merge.
-Si el código del remoto es ligeramente parecido a tu código local y efectivamente quieres hacer un merge, la solución sería:... `
+ `Tu Repositorio Remoto tiene un commit que tu local no tiene, y viceversa. No hay un ancestro común y por lo tanto no se puede hacer merge.Si el código del remoto es ligeramente parecido a tu código local y efectivamente quieres hacer un merge, la solución sería:... `
 
 ##### 4)Descargamos todas las referencias y objetos de nuestro fork
 * git fetch --all
