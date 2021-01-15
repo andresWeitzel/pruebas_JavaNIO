@@ -5,10 +5,11 @@
 
 </br>
 
-<hr>
-
 ## Más Información
 
+<hr>
+
+</br>
 
 ### Unirse como colaborador al proyecto
 
